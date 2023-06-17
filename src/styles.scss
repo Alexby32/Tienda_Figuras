@@ -1,0 +1,72 @@
+.logo{
+  cursor: pointer;
+}
+
+.logo img{
+  height: 70px;
+  width: auto;
+  transition: all 0.3s;
+  margin-left: 45px;
+}
+
+ .logo img:hover{
+  transform: scale(1.2);
+}
+
+.navbar {
+  background-color: #220529;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+
+.navbar-nav .nav-link {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #aaa;
+}
+
+h2.text-center{
+  margin-top: 2%;
+}
+
+.card {
+  transition: transform 0.3s;
+  cursor: pointer;
+  margin-top: 5%;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+footer {
+  background-color: #30083a;
+  color: #fff;
+}
+
+.text-center{
+  margin-top: 20px;
+}
+
+.purple-card {
+  background-color: rgb(0, 0, 0);
+  box-shadow: 0 0 10px #30083a;
+  color: white;
+}
+
+.card.mb-4 {
+  margin-top: 20px;
+}
+
+.expensive-product {
+  background-color: #30083a7a;
+}

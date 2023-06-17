@@ -1,0 +1,119 @@
+<div class="container">
+  <h1 class="my-5 text-center">Figuras de Caballeros dorados renacidos por Hares</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="card mb-4 purple-card" *ngFor="let articulo of articulos">
+      <img [src]="articulo.imagen" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <h5 class="card-text">{{articulo.nombre}}</h5>
+        <h5 class="card-text">${{articulo.precio}}</h5>
+        <div class="d-flex justify-content-end">
+          <a class="btn btn-primary me-2" (click)="agregarCarrito(articulo)">Comprar</a>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Detalles del Artículo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngFor="let articulo of articulos">
+          <img [src]="articulo.imagen" alt="" class="img-fluid">
+          <p class="my-5 text-center">{{articulo.descripcion}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="container">
+    <table class="table table-striped">
+    </table>
+    <h1 class="my-5 text-center">Carrito de compras</h1>
+    <h5 class="my-5 text-center">Los productos se agregarán al carrito</h5>
+    <!-- ngIf y ngStyle ngClass -->
+    <button class="btn btn-primary" data-toggle="modal" data-target="#carritoModal" *ngIf="compras.length > 0"
+      [ngStyle]="{'background-color': compras.length > 0 ? '#30083a' : 'gray'}"
+      [ngClass]="{'expensive-button': totalCompra > 1000, 'highlight-button': compras.length === 0}">
+      Carrito
+    </button>
+    <!-- Modal -->
+    <div id="carritoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="carritoModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="carritoModalLabel">Carrito de compras</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let compra of compras; let i = index"
+                  [ngClass]="{'expensive-product': compra.precio >= 100}">
+                  <td>{{ compra.nombre }}</td>
+                  <td>{{ compra.descripcion }}</td>
+                  <td>${{ compra.precio }}</td>
+                  <td>
+                    <button class="btn btn-danger btn-sm" (click)="eliminarCarrito(i)">Eliminar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" (click)="realizarCompra() ">Realizar Compra</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="my-5 text-center">Agregar Producto</h1>
+    <div class="container">
+      <form (ngSubmit)="agregarArticulo()">
+        <div class="1">
+          <label for="id" class="form-label">ID:</label>
+          <input type="number" class="form-control" id="id" [(ngModel)]="nuevoArticulo.id" name="id" required>
+        </div>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoArticulo.nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+          <label for="precio" class="form-label">Precio:</label>
+          <input type="number" class="form-control" id="precio" [(ngModel)]="nuevoArticulo.precio" name="precio"
+            required>
+        </div>
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripción:</label>
+          <input type="text" class="form-control" id="descripcion" [(ngModel)]="nuevoArticulo.descripcion"
+            name="descripcion" required>
+        </div>
+        <div class="mb-3">
+          <label for="img" class="form-label">Imagen URL:</label>
+          <input type="text" class="form-control" id="img" [(ngModel)]="nuevoArticulo.img" name="img" required>
+        </div>
+        <button type="submit" class="btn btn-primary" *ngIf="nuevoArticulo.descripcion">Agregar</button>
+      </form>
+    </div>
+  </div>
